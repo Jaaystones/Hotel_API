@@ -28,6 +28,10 @@ app.get('/home', (req, res)=> {
 });
 
 //start server
+mongoose.connection.on('connected', ()=> {
+    console.log("mongoDB connected");
+});
+
 mongoose.connection.once( "open", ()=> {
     console.log('Starting Server');
 
