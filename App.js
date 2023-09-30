@@ -7,6 +7,7 @@ import cookieParser from 'cookie-parser';
 import bodyParser from 'body-parser';
 import errorHandler from './middleware/errorMiddleware.js';
 import hotelRouter from './routes/hotelRoute.js';
+import userRouter from './routes/usersRoute.js';
 
 
 //initialize application
@@ -29,7 +30,7 @@ app.get('/home', (req, res)=> {
     res.send("Welcome to JAY SUITE!");
 });
 app.use('/api/hotels', hotelRouter);
-
+app.use('/api/users', userRouter);
 
 //error Handler
 app.use(errorHandler);
