@@ -5,6 +5,7 @@ import express from 'express';
 import { mongoDb } from './config/db_config.js';
 import cookieParser from 'cookie-parser';
 import bodyParser from 'body-parser';
+import errorHandler from './middleware/errorMiddleware.js';
 import hotelRouter from './routes/hotelRoute.js';
 
 
@@ -28,6 +29,10 @@ app.get('/home', (req, res)=> {
     res.send("Welcome to JAY SUITE!");
 });
 app.use('/api/hotels', hotelRouter);
+
+
+//error Handler
+app.use(errorHandler);
 
 //start server
 mongoose.connection.on('connected', ()=> {

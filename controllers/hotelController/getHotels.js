@@ -4,7 +4,14 @@ import asyncHandler from "express-async-handler";
 
 //get hotel information
 const getHotel = asyncHandler( async (req, res)=> {
-    const hotel = await Hotel.findById(req.params.id);
+    const id = req.params.id;
+    
+    if (!id){
+        res.status(404);
+        throw new Error({ message: "Hotel Id not found"});
+    }
+    //find hotel by id
+    const hotel = await Hotel.findById(id);
 
     if (!hotel) {
         res.status(404);
