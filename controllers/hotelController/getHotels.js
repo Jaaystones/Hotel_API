@@ -8,14 +8,14 @@ const getHotel = asyncHandler( async (req, res)=> {
     
     if (!id){
         res.status(404);
-        throw new Error({ message: "Hotel Id not found"});
+        throw new Error("Hotel Id not found");
     }
     //find hotel by id
     const hotel = await Hotel.findById(id);
 
     if (!hotel) {
         res.status(404);
-        throw new Error({ message: 'No hotel found' });    
+        throw new Error('No hotel found');    
     }
     res.status(200)
     .json({
@@ -31,7 +31,7 @@ const getHotels = asyncHandler( async (req, res) => {
 
     if (!hotel) {
         res.status(404);
-        throw new Error({ message: 'No hotel found' });
+        throw new Error('No hotel found');
     }
     res.status(200)
     .json({

@@ -52,9 +52,7 @@ const registerUser = asyncHandler( async (req, res) => {
             token
         });
     }else{
-        res.status(400).json({
-            message: 'Invalid User'
-        });
+        res.status(400).json('Invalid User');
     }
 
 });
