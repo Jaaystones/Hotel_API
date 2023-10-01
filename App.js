@@ -8,6 +8,7 @@ import bodyParser from 'body-parser';
 import errorHandler from './middleware/errorMiddleware.js';
 import hotelRouter from './routes/hotelRoute.js';
 import userRouter from './routes/usersRoute.js';
+import roomRouter from './routes/roomRoute.js';
 
 
 //initialize application
@@ -31,6 +32,7 @@ app.get('/home', (req, res)=> {
 });
 app.use('/api/hotels', hotelRouter);
 app.use('/api/users', userRouter);
+app.use('/api/rooms', roomRouter);
 
 //error Handler
 app.use(errorHandler);
