@@ -32,6 +32,10 @@ const userschema = mongoose.Schema({
         required: true,
         default: "Nigeria"
     },
+    isadmin:{
+        type: Boolean,
+        default: false
+    },
 
 },
 { timestamps: true },
