@@ -15,7 +15,7 @@ const roomSchema = await mongoose.Schema({
         type: Number,
         required: true
     },
-    description: {
+    desc: {
         type: String,
         required: true
     },
@@ -23,7 +23,7 @@ const roomSchema = await mongoose.Schema({
         type: [{number: Number, unavailableDate: {type: [Date]}}],
         required: true
     }
-} 
+} ,
 {timestamps: true});
 
 const Room = mongoose.model("Room", roomSchema);

@@ -5,6 +5,13 @@ import Hotel from "../../models/hotelModel.js";
 const createRoom = asyncHandler(async(req, res)=>{
     //to get hotel ID
     const hotelId = req.params.hotelId;
+
+    const { title, price, maxPeople, desc, roomNumbers } = req.body;
+    //handle errors
+    if(!title || !price || !maxPeople || !desc || !roomNumbers){
+        res.status(404);
+        throw new Error("Please input all required fields")
+    }
       
     const newRoom = new Room(req.body);
     if (!newRoom) {
@@ -21,9 +28,6 @@ const createRoom = asyncHandler(async(req, res)=>{
     }
     res.status(201)
     .json(savedRoom);
-
-        
-
 });
 
 export default createRoom;
