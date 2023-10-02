@@ -1,5 +1,5 @@
 import mongoose from "mongoose";
-
+const Schema = mongoose.Schema;
 
 const roomSchema = await mongoose.Schema({
 
@@ -22,7 +22,12 @@ const roomSchema = await mongoose.Schema({
     roomNumbers: {
         type: [{number: Number, unavailableDate: {type: [Date]}}],
         required: true
-    }
+    },
+    createdBy: {
+        type: Schema.Types.ObjectId,
+        ref: 'User', // Reference to the User model
+        required: true,
+    },
 } ,
 {timestamps: true});
 
