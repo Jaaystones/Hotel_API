@@ -15,6 +15,14 @@ const createRoom = asyncHandler(async (req, res) => {
       throw new Error("Please input all required fields");
     }
 
+    // Check if a room with the same title already exists in the hotel
+    const existingRoom = await Room.findOne({ hotel: hotelId, title, roomNumbers });
+
+    if (existingRoom) {
+      res.status(400);
+      throw new Error("A room with the same title already exists in this hotel.");
+    }
+
     // Create a new room with user information
     const newRoom = new Room({
       ...req.body,

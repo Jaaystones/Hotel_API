@@ -6,7 +6,7 @@ const Protect = asyncHandler( async(req, res, next) => {
     try {
         // retrive token from cookies
         const token = req.cookies.token;
-        //console.log("Token:", token);
+        
 
         if(!token) {
             res.status(403);
@@ -14,7 +14,7 @@ const Protect = asyncHandler( async(req, res, next) => {
         }
         //verify token
         const tokenVerification = jwt.verify(token, process.env.JWT_SECRET, { algorithms: ['HS256'] });
-        //console.log("Token Verification:", tokenVerification);
+        
         // extract id from token
         const user = await User.findById(tokenVerification.id).select("-password");
         //console.log("User:", user);
@@ -25,7 +25,7 @@ const Protect = asyncHandler( async(req, res, next) => {
         }
         //provide user details to any one that uses this middleware.
         req.user = user;
-        //console.log(req.user);
+       
         next();
     } catch (err) {
         res.status(401);
