@@ -1,5 +1,5 @@
 import mongoose from "mongoose";
-
+const Schema = mongoose.Schema;
 
 const roomSchema = await mongoose.Schema({
 
@@ -15,16 +15,24 @@ const roomSchema = await mongoose.Schema({
         type: Number,
         required: true
     },
-    description: {
+    desc: {
         type: String,
         required: true
     },
     roomNumbers: {
         type: [{number: Number, unavailableDate: {type: [Date]}}],
         required: true
-    }
-} 
+    },
+    createdBy: {
+        type: Schema.Types.ObjectId,
+        ref: 'User', // Reference to the User model
+        required: true,
+    },
+} ,
 {timestamps: true});
+
+// Define a compound unique index on 'title' and 'roomNumbers'
+roomSchema.index({ title: 1, "roomNumbers.number": 1 }, { unique: true });
 
 const Room = mongoose.model("Room", roomSchema);
 
