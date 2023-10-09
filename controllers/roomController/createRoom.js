@@ -16,7 +16,7 @@ const createRoom = asyncHandler(async (req, res) => {
     }
 
     // Check if a room with the same title already exists in the hotel
-    const existingRoom = await Room.findOne({ hotel: hotelId, title, roomNumbers });
+    const existingRoom = await Room.findOne({ hotel: hotelId, title });
 
     if (existingRoom) {
       res.status(400);
@@ -27,6 +27,7 @@ const createRoom = asyncHandler(async (req, res) => {
     const newRoom = new Room({
       ...req.body,
       createdBy: userId, // Associate the room with the logged-in user
+      hotel: hotelId, // Set the hotel ID
     });
 
     // Save room information
