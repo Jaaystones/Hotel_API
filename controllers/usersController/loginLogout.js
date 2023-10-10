@@ -8,15 +8,13 @@ const loginUser = asyncHandler( async(req, res) => {
     const { email, password } = req.body;
     // validate fields
     if(!email || !password) {
-        res.status(400);
-        throw new Error("Invalid email or password");
+        return res.status(400).json({ message: "Invalid email or password"});
     }
     //find existing user
     const user = await User.findOne({ email });
 
     if(!user) {
-        res.status(404);
-        throw new Error("User not found, please register");
+       return res.status(404).json({ message: "User not found, please register"});
     }
 
     //check if password is valid

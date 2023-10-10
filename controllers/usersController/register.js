@@ -10,18 +10,18 @@ const registerUser = asyncHandler( async (req, res) => {
 
     //error handling
     if (!name || !email || !password) {
-        res.status(400);
-        throw new Error("Please input all required fields");
+        return res.status(400)
+        .json({ message: "Please input all required fields"});
     }
     if (password.length < 6){
-        res.status(400);
-        throw new Error("Password must be at least 6 characters");
+        return res.status(400)
+        .json({ message: "Password must be at least 6 characters"});
     }
     //check if user already exists
     const existingUser = await User.findOne( { email} );
     if (existingUser){
-        res.status(400);
-        throw new Error("User already exists");
+        return res.status(400)
+        .json({ message: "User already exists"});
     }
 
     //create new user
